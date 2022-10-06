@@ -1,4 +1,4 @@
-import { Ship, Gameboard, gameOver } from ".."
+import { Ship, Gameboard } from ".."
 
 test("Ship Factory", () => {
   let ship = Ship(5)
