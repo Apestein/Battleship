@@ -26,8 +26,8 @@ function Gameboard() {
   const destroyer = Ship(2)
 
   function placeShip(x, y, ship) {
+    if (y + ship.length > 10) return
     for (let i = 0; i < ship.length; i++) {
-      if (y + i > 10) return
       this.board[x][y + i] = ship
     }
   }
@@ -69,7 +69,7 @@ function Gameboard() {
 function startGame() {
   const playerBoard = Gameboard()
   const computerBoard = Gameboard()
-  playerBoard.placeShip(0, 0, playerBoard.carrier)
+  playerBoard.placeShip(0, 5, playerBoard.carrier)
   playerBoard.placeShip(1, 0, playerBoard.battleship)
   playerBoard.placeShip(2, 0, playerBoard.cruiser)
   playerBoard.placeShip(3, 0, playerBoard.submarine)

@@ -22,6 +22,13 @@ function displayBoard(gameBoard1, gameBoard2) {
         e.target.style.pointerEvents = "none"
         if (gameBoard2.gameOver()) console.log("Gameover, player win")
       }
+      square.addEventListener("dragover", (e) => {
+        e.preventDefault()
+      })
+      square.addEventListener("drop", (e) => {
+        e.preventDefault()
+        const data = e.dataTransfer.getData("text")
+      })
       square2.onclick = (e) => {
         const isHit = gameBoard2.receiveAttack(i, j)
         console.table(gameBoard2.board)
@@ -34,4 +41,11 @@ function displayBoard(gameBoard1, gameBoard2) {
       player1.appendChild(square)
       player2.appendChild(square2)
     }
+}
+
+function dragDrop() {
+  const carrier = document.querySelector("img[data='5']")
+  carrier.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text", e.target.data)
+  })
 }
