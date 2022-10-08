@@ -1,4 +1,4 @@
-export { displayBoard }
+export { displayBoard, displaySetup }
 import { computerPlay } from "./index"
 
 function displayBoard(gameBoard1, gameBoard2) {
@@ -16,22 +16,13 @@ function displayBoard(gameBoard1, gameBoard2) {
         square2.textContent = gameBoard2.board[i][j].length
       square.onclick = (e) => {
         const isHit = gameBoard1.receiveAttack(i, j)
-        console.table(gameBoard1.board)
         if (isHit) e.target.classList.add("hit")
         else e.target.classList.add("not-hit")
         e.target.style.pointerEvents = "none"
         if (gameBoard2.gameOver()) console.log("Gameover, player win")
       }
-      square.addEventListener("dragover", (e) => {
-        e.preventDefault()
-      })
-      square.addEventListener("drop", (e) => {
-        e.preventDefault()
-        const data = e.dataTransfer.getData("text")
-      })
       square2.onclick = (e) => {
         const isHit = gameBoard2.receiveAttack(i, j)
-        console.table(gameBoard2.board)
         if (isHit) e.target.classList.add("hit")
         else e.target.classList.add("not-hit")
         e.target.style.pointerEvents = "none"
@@ -43,9 +34,33 @@ function displayBoard(gameBoard1, gameBoard2) {
     }
 }
 
-function dragDrop() {
-  const carrier = document.querySelector("img[data='5']")
+function displaySetup(gameBoard) {
+  const carrier = document.querySelector("img[alt='carrier']")
   carrier.addEventListener("dragstart", (e) => {
-    e.dataTransfer.setData("text", e.target.data)
+    e.dataTransfer.setData("text", e.target.alt)
   })
+
+  const board = document.querySelector(".setup-board")
+  for (let i = 0; i < 10; i++)
+    for (let j = 0; j < 10; j++) {
+      const square = document.createElement("div")
+      square.setAttribute("data-x", `${i}`)
+      square.setAttribute("data-y", `${j}`)
+      square.addEventListener("dragover", (e) => {
+        e.preventDefault()
+      })
+      square.addEventListener("drop", (e) => {
+        e.preventDefault()
+        const data = e.dataTransfer.getData("text")
+        const placedShip = gameBoard.placeShip(i, j, gameBoard[data])
+        if (placedShip)
+          for (let k = 0; k < placedShip.length; k++) {
+            document
+              .querySelector(`div[data-x="${i}"][data-y="${j + k}"]`)
+              .classList.add("exist-ship")
+          }
+        console.table(gameBoard.board)
+      })
+      board.appendChild(square)
+    }
 }

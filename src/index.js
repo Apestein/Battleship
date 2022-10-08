@@ -1,5 +1,5 @@
 export { Ship, Gameboard, computerPlay }
-import { displayBoard } from "./ui"
+import { displayBoard, displaySetup } from "./ui"
 
 function Ship(length) {
   return {
@@ -30,6 +30,7 @@ function Gameboard() {
     for (let i = 0; i < ship.length; i++) {
       this.board[x][y + i] = ship
     }
+    return ship
   }
 
   function receiveAttack(x, y) {
@@ -69,7 +70,10 @@ function Gameboard() {
 function startGame() {
   const playerBoard = Gameboard()
   const computerBoard = Gameboard()
-  playerBoard.placeShip(0, 5, playerBoard.carrier)
+
+  displaySetup(playerBoard)
+
+  /* playerBoard.placeShip(0, 5, playerBoard.carrier)
   playerBoard.placeShip(1, 0, playerBoard.battleship)
   playerBoard.placeShip(2, 0, playerBoard.cruiser)
   playerBoard.placeShip(3, 0, playerBoard.submarine)
@@ -81,8 +85,7 @@ function startGame() {
   computerBoard.placeShip(3, 0, computerBoard.submarine)
   computerBoard.placeShip(4, 0, computerBoard.destroyer)
 
-  console.table(playerBoard.board)
-  displayBoard(playerBoard, computerBoard)
+  displayBoard(playerBoard, computerBoard) */
 }
 
 function computerPlay() {
