@@ -1,5 +1,5 @@
 export { Ship, Gameboard, computerPlay }
-import { displayBoard, displaySetup } from "./ui"
+import { displaySetup } from "./ui"
 
 function Ship(length) {
   return {
@@ -25,10 +25,18 @@ function Gameboard() {
   const submarine = Ship(3)
   const destroyer = Ship(2)
 
-  function placeShip(x, y, ship) {
-    if (y + ship.length > 10) return
+  function placeShip(x, y, ship, axis) {
+    if (axis == "y" && y + ship.length > 10) return
+    if (axis == "x" && x + ship.length > 10) return
+
     for (let i = 0; i < ship.length; i++) {
-      this.board[x][y + i] = ship
+      if (axis == "y" && this.board[x][y + i]) return
+      if (axis == "x" && this.board[x + i][y]) return
+    }
+
+    for (let i = 0; i < ship.length; i++) {
+      if (axis == "y") this.board[x][y + i] = ship
+      else this.board[x + i][y] = ship
     }
     return ship
   }
@@ -71,21 +79,7 @@ function startGame() {
   const playerBoard = Gameboard()
   const computerBoard = Gameboard()
 
-  displaySetup(playerBoard)
-
-  /* playerBoard.placeShip(0, 5, playerBoard.carrier)
-  playerBoard.placeShip(1, 0, playerBoard.battleship)
-  playerBoard.placeShip(2, 0, playerBoard.cruiser)
-  playerBoard.placeShip(3, 0, playerBoard.submarine)
-  playerBoard.placeShip(4, 0, playerBoard.destroyer)
-
-  computerBoard.placeShip(0, 0, computerBoard.carrier)
-  computerBoard.placeShip(1, 0, computerBoard.battleship)
-  computerBoard.placeShip(2, 0, computerBoard.cruiser)
-  computerBoard.placeShip(3, 0, computerBoard.submarine)
-  computerBoard.placeShip(4, 0, computerBoard.destroyer)
-
-  displayBoard(playerBoard, computerBoard) */
+  displaySetup(playerBoard, computerBoard)
 }
 
 function computerPlay() {

@@ -23,13 +23,17 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.ships {
+  display: flex;
+  gap: 25px;
+}
 .player1,
 .player2,
 .setup-board {
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   height: 500px;
-  width: 500px;
+  aspect-ratio: 1/1;
 }
 .exist-ship {
   background-color: greenyellow;
