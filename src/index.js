@@ -1,4 +1,4 @@
-export { Ship, Gameboard, computerPlay }
+export { Ship, Gameboard, computerPlay, randomize }
 import { displaySetup } from "./ui"
 
 function Ship(length) {
@@ -77,22 +77,40 @@ function Gameboard() {
 
 function startGame() {
   const playerBoard = Gameboard()
-  const computerBoard = Gameboard()
+  const computerBoard = randomize()
 
   displaySetup(playerBoard, computerBoard)
 }
 
 function computerPlay() {
   const notHit = []
-  const nodeList = document.querySelectorAll(".player1>.square")
+  const nodeList = document.querySelectorAll(".player1>.cell")
   for (let node of nodeList) {
     if (node.classList.contains("hit") || node.classList.contains("not-hit"))
       continue
     notHit.push(node)
   }
-  console.log(notHit)
   const index = Math.floor(Math.random() * notHit.length)
   notHit[index].click()
+}
+
+function randomize(newBoard, ships) {
+  newBoard = newBoard ?? Gameboard()
+  ships = ships ?? [
+    newBoard.carrier,
+    newBoard.battleship,
+    newBoard.cruiser,
+    newBoard.submarine,
+    newBoard.destroyer,
+  ]
+  if (!ships.length) return newBoard
+
+  let x = Math.floor(Math.random() * 10)
+  let y = Math.floor(Math.random() * 10)
+  let axis = Math.random() > 0.5 ? "y" : "x"
+  let isPlaced = newBoard.placeShip(x, y, ships[0], axis)
+  if (isPlaced) ships.shift()
+  return randomize(newBoard, ships)
 }
 
 startGame()

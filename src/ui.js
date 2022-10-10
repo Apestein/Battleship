@@ -1,5 +1,5 @@
 export { displayBoard, displaySetup }
-import { computerPlay } from "./index"
+import { computerPlay, randomize } from "./index"
 
 function displayBoard(gameBoard1, gameBoard2) {
   const player1 = document.querySelector(".player1")
@@ -33,6 +33,13 @@ function displayBoard(gameBoard1, gameBoard2) {
 }
 
 function displaySetup(playerBoard, computerBoard) {
+  const randomBtn = document.querySelector("#random-btn")
+  randomBtn.onclick = () => {
+    playerBoard = randomize()
+    updateBoard(playerBoard.board)
+    const imgs = document.querySelectorAll(".ships>img")
+    for (let img of imgs) img.remove()
+  }
   const startBtn = document.querySelector("#start-btn")
   startBtn.onclick = () => {
     if (document.querySelectorAll(".ships>img").length != 0) return
@@ -93,5 +100,19 @@ function displaySetup(playerBoard, computerBoard) {
         console.table(playerBoard.board)
       })
       board.appendChild(square)
+    }
+}
+
+function updateBoard(board) {
+  const cells = document.querySelectorAll(".setup-board .exist-ship")
+  for (let cell of cells) cell.classList.remove("exist-ship")
+
+  for (let i = 0; i < 10; i++)
+    for (let j = 0; j < 10; j++) {
+      if (board[i][j]) {
+        document
+          .querySelector(`div[data-x="${i}"][data-y="${j}"]`)
+          .classList.add("exist-ship")
+      }
     }
 }
