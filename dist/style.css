@@ -1,12 +1,36 @@
+@font-face {
+  font-family: "28days";
+  src: url(./28\ Days\ Later.ttf);
+}
+:root {
+  --red: #ef476f;
+  --green: #06d6a0;
+  --blue: #118ab2;
+  --gold: #ffd166;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline: 1px solid black;
+}
+body {
+  font-family: "28days", sans-serif;
+  background-image: url(img/metal.jpg);
+  background-size: cover;
 }
 main {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  row-gap: 50px;
+}
+h1 {
+  font-size: 10rem;
+  grid-column: 1/3;
+}
+#result {
+  font-size: 5rem;
+  grid-column: 1/3;
 }
 .modal {
   position: fixed;
@@ -18,14 +42,28 @@ main {
 }
 .modal-content {
   position: absolute;
-  background-color: #fefefe;
+  background-color: white;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  background-image: url(img/metal.jpg);
+  background-size: cover;
+  width: max(75%, 900px);
+  height: max(75%, 800px);
+}
+h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
 }
 .ships {
-  display: flex;
-  gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 100px 25px;
 }
 .player1,
 .player2,
@@ -34,13 +72,25 @@ main {
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   height: 500px;
   aspect-ratio: 1/1;
+  border: 1px solid black;
+}
+.setup-board > *,
+.player1 > *,
+.player2 > * {
+  border: 1px solid black;
+}
+button {
+  padding: 10px;
+  font-size: large;
+  font-family: "28days", sans-serif;
+  border-radius: 10px;
 }
 .exist-ship {
-  background-color: greenyellow;
+  background-color: var(--green);
 }
 .hit {
-  background-color: red;
+  background-color: var(--red);
 }
 .not-hit {
-  background-color: blue;
+  background-color: var(--blue);
 }

@@ -17,15 +17,24 @@ function displayBoard(gameBoard1, gameBoard2) {
         if (isHit) e.target.classList.add("hit")
         else e.target.classList.add("not-hit")
         e.target.style.pointerEvents = "none"
-        if (gameBoard2.gameOver()) console.log("Gameover, player win")
+        if (gameBoard1.gameOver()) {
+          document.querySelector("#result").textContent =
+            "Gameover! Computer Wins"
+          document.querySelector(".player1").style.pointerEvents = "none"
+          document.querySelector(".player2").style.pointerEvents = "none"
+        }
       }
       square2.onclick = (e) => {
         const isHit = gameBoard2.receiveAttack(i, j)
         if (isHit) e.target.classList.add("hit")
         else e.target.classList.add("not-hit")
         e.target.style.pointerEvents = "none"
-        computerPlay()
-        if (gameBoard1.gameOver()) console.log("Gameover, computer win")
+        if (gameBoard2.gameOver()) {
+          document.querySelector("#result").textContent =
+            "Gameover! Player Wins"
+          document.querySelector(".player1").style.pointerEvents = "none"
+          document.querySelector(".player2").style.pointerEvents = "none"
+        } else computerPlay()
       }
       player1.appendChild(square)
       player2.appendChild(square2)
