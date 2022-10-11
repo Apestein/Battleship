@@ -10,11 +10,14 @@
   </head>
   <body>
     <main>
+      <h1>Battleship</h1>
       <div class="player1"></div>
       <div class="player2"></div>
+      <p id="result">Objective: Sink All Enemy Ships</p>
     </main>
     <div class="modal">
       <div class="modal-content">
+        <h2>Place Your Ships</h2>
         <div class="setup-board"></div>
         <div class="ships">
           <img
@@ -43,9 +46,11 @@
             height="50px"
           />
         </div>
-        <button id="random-btn">Randomize</button>
-        <button id="start-btn">Start</button>
-        <button id="rotate-btn" data="y">Rotate</button>
+        <div class="setup-btns">
+          <button id="random-btn">Randomize</button>
+          <button id="start-btn">Start</button>
+          <button id="rotate-btn" data="y">Rotate</button>
+        </div>
       </div>
     </div>
   </body>
