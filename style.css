@@ -52,12 +52,13 @@ h1 {
   padding: 25px;
   background-image: url(img/metal.jpg);
   background-size: cover;
-  width: max(75%, 900px);
-  height: max(75%, 800px);
+  width: 80%;
+  height: 100%;
+  overflow: auto;
 }
 h2 {
   font-size: 3rem;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
 }
 .ships {
   display: grid;
@@ -70,9 +71,9 @@ h2 {
 .setup-board {
   display: grid;
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
-  height: 500px;
-  aspect-ratio: 1/1;
   border: 1px solid black;
+  min-height: 500px;
+  aspect-ratio: 1/1;
 }
 .setup-board > *,
 .player1 > *,
