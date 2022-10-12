@@ -11,7 +11,7 @@ function displayBoard(gameBoard1, gameBoard2) {
       square.classList.add("cell")
       square2.classList.add("cell")
       if (gameBoard1.board[i][j]) square.classList.add("exist-ship")
-      if (gameBoard2.board[i][j]) square2.classList.add("exist-ship")
+      //if (gameBoard2.board[i][j]) square2.classList.add("exist-ship")
       square.onclick = (e) => {
         const isHit = gameBoard1.receiveAttack(i, j)
         if (isHit) e.target.classList.add("hit")
